@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="azarz.cartofeln" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Cartofeln</name>
+    <description>
+      Appli de rando pour les copains
+    </description>
+    <author href="https://github.com/azarz">
+        azarz
+    </author>
+    <icon src="www/img/favicon.png" />
+    <preference name="loadUrlTimeoutValue" value="100000" />
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+        <hook type="after_prepare" src="remove_permissions.js"/>
+        <preference name="OverrideUserAgent" value="cartofeln" />
+        <preference name="android-targetSdkVersion" value="32" />
+        <preference name="AndroidInsecureFileModeEnabled" value="true" />
+    </platform>
+</widget>

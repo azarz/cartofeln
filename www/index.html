@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <meta charset="utf-8">
+
+        <!-- FIXME -->
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *"> -->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <link rel="stylesheet" type="text/css" href="css/leaflet.css">
+        <link rel="stylesheet" type="text/css" href="css/leaflet.contextmenu.min.css">
+        <link rel="stylesheet" type="text/css" href="css/GpPluginLeaflet.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+
+    <title>Cartofeln</title>
+    </head>
+    <body>
+        <div class="app">
+            <div id="blueBg" class="d-none"></div>
+
+            <div class="popup d-none" id="menu">
+              <div id="menuItems">
+                <div id="menuWindowClose"></div>
+                <div class="bigMenuItem" id="menuItemLegend"><span class="menuItemIcon" id="menuItemLegendIcon"></span><span>Légende de la carte</span></div>
+                <div class="bigMenuItem" id="menuItemInfo"><span class="menuItemIcon" id="menuItemInfoIcon"></span><span>Informations</span></div>
+                <hr>
+                <div class="bigMenuItem" id="menuItemParams"><span class="menuItemIcon" id="menuItemParamsIcon"></span><span>Paramètres</span></div>
+              </div>
+            </div>
+
+            <div id="cartoContainer">
+              <div id="map">
+                <div class="button d-none" id="compassBtn"></div>
+                <div id="footer">
+                  <div class="button" id="geolocateBtn"></div>
+                </div>
+              </div>
+
+              <div class="d-none" id="infoWindow">
+                <div id="infoWindowContent">
+                  <div id="infoWindowClose"></div>
+                  <h3>Informations</h3>
+                  <div id="infoText">Prises de vues satellitaires ou aériennes des territoires.</div>
+                </div>
+              </div>
+
+              <div class="d-none" id="legendWindow">
+                <div id="legendWindowContent">
+                  <div id="legendWindowClose"></div>
+                  <h3>Légende de la carte</h3>
+                  <div id="legendImg"><img src="https://www.geoportail.gouv.fr/depot/layers/ORTHOIMAGERY.ORTHOPHOTOS/legendes/ORTHOIMAGERY.ORTHOPHOTOS-legend.png" alt="légende photos aeriennes"></div>
+                </div>
+              </div>
+            </div>
+
+            <div id="header">
+              <div class="button, d-none" id="backTopLeft"></div>
+              <div id="search">
+                <span id="searchImage" alt="rechercher"></span>
+                <input id="lieuRech" name="lieuRech" type="text" placeholder="Rechercher un lieu, une adresse..." autocorrect="off" autocomplete="off" autocapitalize="off"/>
+                <div id="resultsRech"></div>
+              </div>
+              <div class="button" id="menuBtn">
+              </div>
+              <div class="button, d-none" id="closeSearch">
+              </div>
+            </div>
+
+            <div class="button" id="catalogBtn">
+            </div>
+
+            <div id="centerTargetInfo">
+              <div id="centerCoords" class="d-none">
+              </div>
+
+              <div id="coordTypeDisplay" class="d-none">
+                Géographique
+              </div>
+            </div>
+
+
+            <div id="centerReticule" class="button d-none">
+            </div>
+
+            <div class="d-none" id="altMenuContainer">
+              <div class="d-none altMenu" id="parameterMenu">
+                <div id="paramsInterface">
+                  <h3>Interface</h3>
+                  <p><input type="checkbox" id="chkRotate" checked><label for="chkRotate"> Rotation de la carte avec les deux doigts</label></p>
+                </div>
+                <div id="paramsPrintCoords">
+                  <h3>Affichage des coordonnées</h3>
+                  <p><input type="checkbox" id="chkPrintCoordsReticule"><label for="chkPrintCoordsReticule"> Afficher les coordonnées avec la croix centrale</label></p>
+                </div>
+                <div id="coordType">
+                  <h3>Système de référence</h3>
+                  <p><input type="radio" id="coordGeoBtn" name="coordRadio" value="latlng" checked><label for="coordGeoBtn">Géographique</label></p>
+                  <p><input type="radio" id="coordMercBtn" name="coordRadio" value="merc"><label for="coordMercBtn">Web Mercator</label></p>
+                  <p><input type="radio" id="coordL93Btn" name="coordRadio" value="l93"><label for="coordL93Btn">Lambert 93</label></p>
+                </div>
+              </div>
+            </div>
+
+            <div id="catalog" class="d-none">
+
+              <div id="menuC">
+                <div class="layer" id="layerPlan">
+                  <img name="plan-ign" id="plan-ign" src="img/couches/plan-ign.jpg" alt="plan-ign" /></a>
+                  <div id="lplan-ign" class="textCouche">Plan IGN</div>
+                </div>
+                <div class="layer" id="layerTopo">
+                  <img name="topo" id="topo" src="img/couches/topo.jpg" alt="carte topographique IGN" /></a>
+                  <div id="ltopo" class="textCouche">Carte topographique IGN</div>
+                </div>
+                <div class="layer" id="layerRoutes">
+                  <img name="routes" id="routes"  src="img/couches/routes.jpg" alt="routes" /></a>
+                  <div id="lroutes" class="textCouche">Vue aérienne</div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/external/leaflet.js"></script>
+        <script type="text/javascript" src="js/external/proj4.js"></script>
+        <script type="text/javascript" src="js/external/pouchdb.min.js"></script>
+        <script type="text/javascript" src="js/external/leaflet-src.js"></script>
+        <script type="text/javascript" src="js/external/leaflet.tilelayer.fallback.js"></script>
+        <script type="text/javascript" src="js/external/leaflet.rotatedMarker.js"></script>
+        <script type="text/javascript" src="js/external/leaflet.contextmenu.min.js"></script>
+        <script type="text/javascript" src="js/external/GpPluginLeaflet.js" data-key="calcul"></script>
+        <script type="text/javascript" src="js/external/purify.min.js"></script>
+        <script type="text/javascript" src="js/external/hammer.min.js"></script>
+        <script type="text/javascript" src="js/index.bundle.js"></script>
+    </body>
+
+</html>
