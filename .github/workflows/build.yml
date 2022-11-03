@@ -9,17 +9,6 @@ on:
       - develop
 
 jobs:
-  create-envfile:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Make envfile
-      uses: SpicyPizza/create-envfile@v1.3
-      with:
-        directory: .
-        envkey_GP_TOKEN: ${{ secrets.GP_TOKEN }}
-        file_name: .env
-        fail_on_empty: false
 
   build:
     name: Build APK
@@ -27,6 +16,14 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
+
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          directory: .
+          file_name: .env
+          envkey_GP_TOKEN: ${{ secrets.GP_TOKEN }}
+          fail_on_empty: false
 
       - name: Setup java
         uses: actions/setup-java@v1

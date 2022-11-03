@@ -1,7 +1,7 @@
 {
   "name": "cartofeln",
   "displayName": "Cartofeln",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Appli de rando pour les copains",
   "main": "index.js",
   "scripts": {

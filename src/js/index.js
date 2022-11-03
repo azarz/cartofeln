@@ -109,7 +109,7 @@ function app() {
     elevationpath._distance = parseFloat(routeResponse.totalDistance);
     elevationpath._geometry = geom;
     elevationpath.options.elevationPathOptions.sampling = 0;
-    if (geom.length() < 200) {
+    if (geom.length < 200) {
       elevationpath.options.elevationPathOptions.sampling = 200;
     }
     elevationpath._pictoContainer.style.display = "none";
