@@ -15,6 +15,7 @@ jobs:
       with:
         directory: .
         file_name: .env
+        envkey_GP_TOKEN: ${{ secrets.GP_TOKEN }}
         fail_on_empty: false
 
   deploy:
@@ -22,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Get the tagname
         id: get_tagname

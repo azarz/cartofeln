@@ -17,6 +17,7 @@ jobs:
       uses: SpicyPizza/create-envfile@v1.3
       with:
         directory: .
+        envkey_GP_TOKEN: ${{ secrets.GP_TOKEN }}
         file_name: .env
         fail_on_empty: false
 
@@ -25,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup java
         uses: actions/setup-java@v1

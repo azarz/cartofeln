@@ -106,6 +106,10 @@ div[id^=GProuteResultsPanel] div label {
   display: inline-block;
 }
 
+div[id^="GProuteResultsValueDist"], div[id^="GProuteResultsValueTime"] {
+  width: 140px;
+}
+
 .d-none {
   display: none !important;
 }
