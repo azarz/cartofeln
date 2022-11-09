@@ -11,7 +11,7 @@ function removeAllLayers() {
   Globals.map.eachLayer( (layer) => {
     Globals.map.removeLayer(layer);
   });
-  document.querySelectorAll("#menuC img").forEach(elem => {
+  document.querySelectorAll(".menuC img").forEach(elem => {
     elem.classList.remove('selectedLayer');
   });
   UpdateLegend.updateLegend();
@@ -77,9 +77,69 @@ function displayTopo() {
   MenuDisplay.closeCat();
 }
 
+function displayOpenTopoMap() {
+  /**
+   * Affiche la couche carte OpenTopoMap
+   */
+  removeAllLayers();
+  document.getElementById("openTopoMap").classList.add("selectedLayer");
+  DOM.$infoText.innerHTML = Texts.informationTexts.openTopoMap;
+  DOM.$legendImg.innerHTML = Texts.legendImgs.openTopoMap;
+  Layers.OpenTopoMap.addTo(Globals.map);
+  if (Globals.gpsMarkerLayer) {
+    Globals.gpsMarkerLayer.addTo(Globals.map);
+  }
+  if (Globals.adressMarkerLayer) {
+    Globals.adressMarkerLayer.addTo(Globals.map);
+  }
+  Globals.layerDisplayed = 'openTopoMap';
+  MenuDisplay.closeCat();
+}
+
+function displayOpenStreetMapFrance() {
+  /**
+   * Affiche la couche carte OpenStreetMapFrance
+   */
+  removeAllLayers();
+  document.getElementById("openStreetMapFrance").classList.add("selectedLayer");
+  DOM.$infoText.innerHTML = Texts.informationTexts.openStreetMapFrance;
+  DOM.$legendImg.innerHTML = Texts.legendImgs.openStreetMapFrance;
+  Layers.OpenStreetMapFrance.addTo(Globals.map);
+  if (Globals.gpsMarkerLayer) {
+    Globals.gpsMarkerLayer.addTo(Globals.map);
+  }
+  if (Globals.adressMarkerLayer) {
+    Globals.adressMarkerLayer.addTo(Globals.map);
+  }
+  Globals.layerDisplayed = 'openStreetMapFrance';
+  MenuDisplay.closeCat();
+}
+
+function displayCyclOSM() {
+  /**
+   * Affiche la couche carte CyclOSM
+   */
+  removeAllLayers();
+  document.getElementById("cyclOSM").classList.add("selectedLayer");
+  DOM.$infoText.innerHTML = Texts.informationTexts.cyclOSM;
+  DOM.$legendImg.innerHTML = Texts.legendImgs.cyclOSM;
+  Layers.CyclOSM.addTo(Globals.map);
+  if (Globals.gpsMarkerLayer) {
+    Globals.gpsMarkerLayer.addTo(Globals.map);
+  }
+  if (Globals.adressMarkerLayer) {
+    Globals.adressMarkerLayer.addTo(Globals.map);
+  }
+  Globals.layerDisplayed = 'cyclOSM';
+  MenuDisplay.closeCat();
+}
+
 export {
   removeAllLayers,
   displayOrthoAndRoads,
   displayPlan,
   displayTopo,
+  displayOpenTopoMap,
+  displayOpenStreetMapFrance,
+  displayCyclOSM,
 };

@@ -15,5 +15,7 @@ Avec un mode position GPS et un mode navigation.
   - [x] Ne pas supprimer les résultats en fermant les widgets
   - [x] Ajouter l'ajout de points intermédiaires d'itinéraire au menu contextuel
 - Ajouts de nouveaux fonds de carte
-  - fond OSM
-- Enregistrement des itinéraires calculés en local
+  - [x] OpenTopoMap
+  - [x] OpenStreetMapFrance
+  - [x] CyclOSM
+- [ ] Enregistrement des itinéraires calculés en local

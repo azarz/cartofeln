@@ -69,6 +69,9 @@ function addEventListeners() {
   document.getElementById("layerRoutes").addEventListener('click', LayerSwitch.displayOrthoAndRoads);
   document.getElementById("layerPlan").addEventListener('click', LayerSwitch.displayPlan);
   document.getElementById("layerTopo").addEventListener('click', LayerSwitch.displayTopo);
+  document.getElementById("layerOpenTopoMap").addEventListener('click', LayerSwitch.displayOpenTopoMap);
+  document.getElementById("layerOpenStreetMapFrance").addEventListener('click', LayerSwitch.displayOpenStreetMapFrance);
+  document.getElementById("layerCyclOSM").addEventListener('click', LayerSwitch.displayCyclOSM);
 
   // Ouverture-Fermeture
   document.getElementById("catalogBtn").addEventListener('click', MenuDisplay.openCat);

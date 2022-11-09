@@ -218,6 +218,15 @@ function app() {
     case 'topo':
       LayerSwitch.displayTopo();
       break;
+    case 'openTopoMap':
+      LayerSwitch.displayOpenTopoMap();
+      break;
+    case 'openStreetMapFrance':
+      LayerSwitch.displayOpenStreetMapFrance();
+      break;
+    case 'cyclOSM':
+      LayerSwitch.displayCyclOSM();
+      break;
   }
   /**/
 
