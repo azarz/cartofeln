@@ -41,16 +41,25 @@ function app() {
     contextmenu: true,
     contextmenuWidth: 180,
     // Map context menu
-    contextmenuItems: [{
-      text: 'Afficher les coordonnées',
-      callback: _showCoordinates
-    }, '-', {
-        text: 'Itinéraire depuis ce lieu',
-        callback: _routeFrom
-    }, {
-        text: 'Itinéraire vers lieu',
-        callback: _routeTo
-    }]
+    contextmenuItems: [
+      {
+        text: 'Afficher les coordonnées',
+        callback: _showCoordinates
+      },
+      '-',
+      {
+          text: 'Itinéraire depuis ce lieu',
+          callback: _routeFrom
+      },
+      {
+          text: 'Itinéraire vers lieu',
+          callback: _routeTo
+      },
+      {
+        text: 'Ajouter un point intermédiaire',
+        callback: _addIntermediate
+    },
+    ]
   }).setView([47.33, 2.0], 5);
 
   const map = Globals.map;
@@ -84,6 +93,21 @@ function app() {
     },
   });
   map.addControl(route);
+
+  const pointsMax = route._currentPoints.length;
+  let emptyRoutePoints = [];
+  _fillEmptyRoutePointsList();
+
+  function _fillEmptyRoutePointsList() {
+    emptyRoutePoints = []
+    for (var i = 0; i < pointsMax - 1; i++) {
+      if (!route._currentPoints[i].getCoordinate()) {
+        emptyRoutePoints.push(route._currentPoints[i]);
+      }
+    }
+    console.log(emptyRoutePoints)
+  }
+
 
   // Geoportail widget elevationpath
   const elevationpath = L.geoportalControl.ElevationPath({
@@ -132,26 +156,48 @@ function app() {
     if (!route._showRouteContainer.checked) {
       route._pictoRouteContainer.click();
     }
-    route._start._inputShowPointerContainer.checked = true;
-    route._start._inputAutoCompleteContainer.className = "GPlocationOriginHidden";
-    route._start._inputCoordinateContainer.className = "GPlocationOriginVisible";
-    route._start._setLabel();
-    route._start._clearResults();
-    route._start._setMarker(e.latlng, null, false);
-    route._start._setCoordinate(e.latlng);
+    route._currentPoints[0]._inputShowPointerContainer.checked = true;
+    route._currentPoints[0]._inputAutoCompleteContainer.className = "GPlocationOriginHidden";
+    route._currentPoints[0]._inputCoordinateContainer.className = "GPlocationOriginVisible";
+    route._currentPoints[0]._setLabel();
+    route._currentPoints[0]._clearResults();
+    route._currentPoints[0]._setMarker(e.latlng, null, false);
+    route._currentPoints[0]._setCoordinate(e.latlng);
+    document.querySelector('input[id^="GProuteSubmit"]').click();
   }
 
   function _routeTo(e) {
     if (!route._showRouteContainer.checked) {
       route._pictoRouteContainer.click();
     }
-    route._end._inputShowPointerContainer.checked = true;
-    route._end._inputAutoCompleteContainer.className = "GPlocationOriginHidden";
-    route._end._inputCoordinateContainer.className = "GPlocationOriginVisible";
-    route._end._setLabel();
-    route._end._clearResults();
-    route._end._setMarker(e.latlng, null, false);
-    route._end._setCoordinate(e.latlng);
+    route._currentPoints[pointsMax - 1]._inputShowPointerContainer.checked = true;
+    route._currentPoints[pointsMax - 1]._inputAutoCompleteContainer.className = "GPlocationOriginHidden";
+    route._currentPoints[pointsMax - 1]._inputCoordinateContainer.className = "GPlocationOriginVisible";
+    route._currentPoints[pointsMax - 1]._setLabel();
+    route._currentPoints[pointsMax - 1]._clearResults();
+    route._currentPoints[pointsMax - 1]._setMarker(e.latlng, null, false);
+    route._currentPoints[pointsMax - 1]._setCoordinate(e.latlng);
+    document.querySelector('input[id^="GProuteSubmit"]').click();
+  }
+
+  function _addIntermediate(e) {
+    _fillEmptyRoutePointsList();
+    if (!route._showRouteContainer.checked) {
+      route._pictoRouteContainer.click();
+    }
+    if (emptyRoutePoints.length === 0) {
+      window.plugins.toast.showLongBottom("Nombre max de points intermédiaires atteint");
+      return
+    }
+    document.querySelector('div[id^="GPlocationStageAdd"]').click();
+    emptyRoutePoints[0]._inputShowPointerContainer.checked = true;
+    emptyRoutePoints[0]._inputAutoCompleteContainer.className = "GPlocationOriginHidden";
+    emptyRoutePoints[0]._inputCoordinateContainer.className = "GPlocationOriginVisible";
+    emptyRoutePoints[0]._setLabel();
+    emptyRoutePoints[0]._clearResults();
+    emptyRoutePoints[0]._setMarker(e.latlng, null, false);
+    emptyRoutePoints[0]._setCoordinate(e.latlng);
+    document.querySelector('input[id^="GProuteSubmit"]').click();
   }
 
   // Chargement de la postition précédente
