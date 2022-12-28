@@ -62,6 +62,11 @@ function displayTopo() {
   /**
    * Affiche la couche carte topo
    */
+  if (cordova.platformId == "browser") {
+    alert("Carte Topographique IGN uniquement disponible sur l'application");
+    return
+  }
+
   removeAllLayers();
   document.getElementById("topo").classList.add("selectedLayer");
   DOM.$infoText.innerHTML = Texts.informationTexts.topo;

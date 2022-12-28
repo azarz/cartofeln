@@ -149,7 +149,9 @@ function _requestLocationAuthorization() {
 }
 
 function requestLocationAccuracy() {
-  cordova.plugins.diagnostic.getLocationAuthorizationStatus(_handleLocationAuthorizationStatus, _onError);
+  if (platform != "browser") {
+    cordova.plugins.diagnostic.getLocationAuthorizationStatus(_handleLocationAuthorizationStatus, _onError);
+  }
 }
 
 function _makeRequest(){
