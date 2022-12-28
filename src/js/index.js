@@ -114,6 +114,7 @@ function app() {
     elevationPathOptions: {
       httpMethod: "POST",
       api: "WPS",
+      sampling: 200,
     }
   });
   map.addControl(elevationpath);
@@ -138,6 +139,7 @@ function app() {
     elevationpath._pictoContainer.style.display = "none";
     elevationpath._panelContainer.style.display = "block";
     elevationpath._altiRequest();
+    elevationpath.options.elevationPathOptions.sampling = 200;
   };
 
   // Context menu functions
