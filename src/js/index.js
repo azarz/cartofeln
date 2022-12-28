@@ -105,7 +105,6 @@ function app() {
         emptyRoutePoints.push(route._currentPoints[i]);
       }
     }
-    console.log(emptyRoutePoints)
   }
 
 
