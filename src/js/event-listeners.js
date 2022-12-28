@@ -238,6 +238,30 @@ function addEventListeners() {
     DOM.$compassBtn.classList.add("d-none");
   })
 
+  // Import de fichiers
+  document.getElementById("fileBtn").addEventListener('click', () => {
+    const input = document.createElement('input');
+    input.type = "file";
+    input.accept = ".geojson";
+
+    input.onchange = e => {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsText(file,'UTF-8');
+      reader.onload = readerEvent => {
+         const content = readerEvent.target.result; // this is the content!
+         const importedJson = L.geoJSON(JSON.parse(content), {
+          "color": "#795c5f",
+          "weight": 6,
+          "opacity": 0.8
+        }).addTo(Globals.map);
+
+        Globals.map.fitBounds(importedJson.getBounds());
+      }
+    }
+    input.click();
+  });
+
 }
 
 export {
