@@ -1,4 +1,4 @@
-var permissionsToRemove = [ "BLUETOOTH", "WRITE_EXTERNAL_STORAGE"];
+var permissionsToRemove = [ "BLUETOOTH" ];
 
 var fs = require('fs');
 var path = require('path');

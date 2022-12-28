@@ -458,7 +458,7 @@ input[type='radio']:checked + label:before {
   display: inline-block;
 }
 
-#catalogBtn, #geolocateBtn, #compassBtn  {
+#catalogBtn, #geolocateBtn, #compassBtn, #fileBtn  {
   border: 5px solid white;
   border-radius: 10px;
   background-position: center;
@@ -478,6 +478,15 @@ input[type='radio']:checked + label:before {
   background-image: url("assets/layers.svg");
   position: absolute;
   top: 60px;
+}
+
+#fileBtn {
+  background-image: url(
+    data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJ4AAACeCAYAAADDhbN7AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAETgAABE4BQouT/AAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAQzSURBVHic7d29bl1FFIbhd+E4IfxYBBEBDaLhBtIgGiLBDaSANqKhgSvgBrgBOgooaaho0kDBnxAFEkIkCBAgIyQQWDiyY8XGJovCTofB9lkzc872+1zAWiPPp9lnb8+eDZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkjRcjmmbmReASsDKi/yF2gB8j4uvRA1EDmflaZm7n/LqWmY+N/jtNXdcVLzNfBt7s2fOEPgWejYg7owcyVb2Dtwo80bPnDC5HxEejBzFV9/RqlJnLLE7oAJ4aPYAp6xa8zr0qLI0ewJQtWhg0EQZPQxg8DXFm9ADm2H2ZeWH0IBrbi4jNEY27PU7JzHPAdq9+OrIvgVci4rOeTQ2eAHaBZyLii14N/Y0ngGXg9Z4NDZ7uutSzmcHTXWd7NjN4GsLgaQiDpyEMnoYweBrC4GkIg6chDJ6GMHgawuBpCIOnIXpuBE2g27YbHdvW6AFIkiRJkiRJmi9l79Vm5tPA88zX8bKqsw5ci4ivKoqVBC8zXwXeqKqnubUHXI2Id2YtNHNQMnMJ+BNXutNiNSKenLVIxSaB8xi60+TRiiIzBy8ibgFrBWPRYlitKFK1LepGUR3Nv5LvgFQF73pRHc2/krk2eDoug6chSua66jneI8AfFbU013aBByLir1kLlax4EbEG/F5RS3Ptu4rQQe3LPl5up69sjg2ejsPgaYi5DJ4fGJ6+sjmu3BZ1gf3NApqmHfbvaPcqipWteBGxDvxaVU9z59uq0EH9ERZebqerdG6rg+cNxnSVzq3B01EZPA1ROrel70hk5gpws7quhrsNPBgRf1cVLF3xImID+KWypubCN5WhgzYHM3q5nZ7yOTV4OgqDpyEWIng+RJ6e8jktv/vMzPuBDTzYeyq2gJWIuFNZtDwcEbEF/FxdV8PcqA4dtFuVvNxOR5O5bBU8bzCmo8lcGjz9H4OnIZrMZZP/qWbmeWATWGpRX91sAA9FRFYXbrLiRcRt4KcWtdXV9Rahg7bP2rzcLr5mc2jw9F8MnoZYyOD5EHnxNZvDZjuFM/MccIu+38RVnfWIeLhV8WYrXkTsAD+0qq/mmv5Uar2DxMvt4lro4HmDsbgMnoZoerUyeDpM07lr+v5rZi6zf2d7tmUflVuLiIstGzRd8SJiF/i+ZQ810fymsMd7EV5uF0/zOTN4+jcGT0NMIng+RF48zT+K2PxUp8w8w/5u5Htb91KJ3yLi8dZNmq94B+fmft66j8p80qNJr7f93+7UR7N7q0eTLgcoZuYS8AFwuUc/ndi7EfFij0ZdVryDQ/2uAB/26KcTeQ+42qtZt4N1IuIm8BzwEvAxsN2rtw61BbwPvABcOXg7sIuhZxUfnJnsu7dj7EXE5uhBSJIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIknTr/AJwHdJqjHOfMAAAAAElFTkSuQmCC
+    );
+  background-size: cover;
+  position: absolute;
+  top: 114px;
 }
 
 #geolocateBtn {
