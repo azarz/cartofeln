@@ -18,4 +18,4 @@ Avec un mode position GPS et un mode navigation.
   - [x] OpenTopoMap
   - [x] OpenStreetMapFrance
   - [x] CyclOSM
-- [ ] Enregistrement des itinéraires calculés en local
+- [x] Enregistrement des itinéraires calculés en local
