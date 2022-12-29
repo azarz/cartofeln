@@ -88,11 +88,38 @@ function app() {
     disableReverse: true,
     graphs: ["Pieton"],
     routeOptions: {
-      onSuccess: computeRouteElevation,
+      onSuccess: routeSuccess,
       geometryInInstructions: false,
     },
   });
   map.addControl(route);
+  let currentRouteGeojson;
+
+  const dlRouteDiv = document.createElement("div");
+  dlRouteDiv.id = "GPdownloadRoute";
+  dlRouteDiv.addEventListener("click", () => {
+    const fileString = JSON.stringify(currentRouteGeojson);
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(fileString);
+    const hash = Array.from(fileString).reduce((hash, char) => 0 | (31 * hash + char.charCodeAt(0)), 0);
+    const fileName = `itineraire-cartofeln-${hash}.geojson`;
+    if (cordova.platformId == "browser") {
+      const $downloadAnchor = document.getElementById('downloadAnchor');
+      $downloadAnchor.setAttribute("href",     dataStr     );
+      $downloadAnchor.setAttribute("download", fileName);
+      $downloadAnchor.click();
+    } else {
+      var fileTransfer = new FileTransfer();
+
+      fileTransfer.download(
+        dataStr,
+        cordova.file.externalRootDirectory + "download/" + fileName,
+        function() {
+          window.plugins.toast.showLongBottom("Itinéraire enregistré dans le dossier téléchargements");
+        },
+      );
+    }
+  })
+  document.querySelector('div[id^="GProuteResults-"]').appendChild(dlRouteDiv);
 
   const pointsMax = route._currentPoints.length;
   let emptyRoutePoints = [];
@@ -107,7 +134,6 @@ function app() {
     }
   }
 
-
   // Geoportail widget elevationpath
   const elevationpath = L.geoportalControl.ElevationPath({
     apiKey: "calcul",
@@ -118,6 +144,11 @@ function app() {
     }
   });
   map.addControl(elevationpath);
+
+  function routeSuccess(routeResponse) {
+    computeRouteElevation(routeResponse);
+    currentRouteGeojson = routeResponse.routeGeometry;
+  }
 
   // Elevation path on route result
   function computeRouteElevation(routeResponse) {
