@@ -249,7 +249,7 @@ function addEventListeners() {
       const reader = new FileReader();
       reader.readAsText(file,'UTF-8');
       reader.onload = readerEvent => {
-         const content = readerEvent.target.result; // this is the content!
+         const content = readerEvent.target.result;
          const importedJson = L.geoJSON(JSON.parse(content), {
           "color": "#795c5f",
           "weight": 6,
