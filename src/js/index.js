@@ -93,6 +93,30 @@ function app() {
     },
   });
   map.addControl(route);
+  const reference = document.querySelector('form[id^="GProuteForm"]').firstChild.firstChild.lastChild;
+  const routeFromMe = document.createElement("label");
+  routeFromMe.id = "routeFromMe";
+  routeFromMe.classList.add("GPlocationOriginPointerImg");
+  routeFromMe.classList.add("GPlocationOriginPointerImgFromMyPosition");
+  routeFromMe.title = "Itinéraire depuis ma position";
+  reference.parentNode.insertBefore(routeFromMe, reference);
+
+  routeFromMe.addEventListener("click", () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition( (position) => {
+        const latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
+        route._currentPoints[0]._inputShowPointerContainer.checked = true;
+        route._currentPoints[0]._inputAutoCompleteContainer.className = "GPlocationOriginHidden";
+        route._currentPoints[0]._inputCoordinateContainer.className = "GPlocationOriginVisible";
+        route._currentPoints[0]._setLabel();
+        route._currentPoints[0]._clearResults();
+        route._currentPoints[0]._setMarker(latlng, null, false);
+        route._currentPoints[0]._setCoordinate(latlng);
+        document.querySelector('input[id^="GProuteSubmit"]').click();
+      });
+    }
+  })
+
   let currentRouteGeojson;
 
   const dlRouteDiv = document.createElement("div");
@@ -195,6 +219,7 @@ function app() {
     route._currentPoints[0]._clearResults();
     route._currentPoints[0]._setMarker(e.latlng, null, false);
     route._currentPoints[0]._setCoordinate(e.latlng);
+    console.log(e.latlng);
     document.querySelector('input[id^="GProuteSubmit"]').click();
   }
 
