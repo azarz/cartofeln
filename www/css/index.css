@@ -130,6 +130,7 @@ label.GPlocationOriginPointerImg[id="routeFromMe"] {
   );
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
+  background-position: 0 !important;
 }
 
 #GPdownloadRoute {
