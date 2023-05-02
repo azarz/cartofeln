@@ -13,6 +13,9 @@ let lastTextInSearch = '';
 /* global: current map rotation */
 let currentRotation = 0;
 
+/* global: flag to check if map move fired by code */
+let movedFromCode = false;
+
 let gpsMarkerLayer;
 let adressMarkerLayer;
 
@@ -42,4 +45,5 @@ export default {
   markerIcon2,
   autocompletion_results,
   positionBearing,
+  movedFromCode,
 };

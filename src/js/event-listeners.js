@@ -221,6 +221,16 @@ function addEventListeners() {
     disableRotation = false;
   });
 
+  map.on('movestart', function (e) {
+    if (Globals.movedFromCode) {
+      return
+    } else if (Location.tracking_active){
+      // De tracking a simple suivi de position
+      Location.locationOnOff();
+      Location.locationOnOff();
+    }
+  });
+
 
   // Sauvegarde de l'état de l'application
   document.addEventListener('pause', () => {
@@ -232,11 +242,33 @@ function addEventListeners() {
 
   // Rotation
   DOM.$compassBtn.addEventListener("click", () => {
-    Globals.currentRotation = 0;
-    Globals.map.setBearing(0);
-    DOM.$compassBtn.style.transform = "rotate(" + 0 + "deg)";
-    DOM.$compassBtn.classList.add("d-none");
-  })
+    if (Location.tracking_active){
+      // De tracking a simple suivi de position
+      Location.locationOnOff();
+      Location.locationOnOff();
+    }
+    Globals.currentRotation = Math.round((Globals.currentRotation % 360) + 360 ) % 360;
+
+    let interval;
+
+    function animateRotate() {
+      if (Globals.currentRotation < 180) {
+        Globals.currentRotation -= 1;
+      } else {
+        Globals.currentRotation += 1;
+      }
+      map.setBearing(Globals.currentRotation);
+      DOM.$compassBtn.style.transform = "rotate(" + Globals.currentRotation + "deg)";
+      if (Globals.currentRotation % 360 == 0) {
+        clearInterval(interval);
+        DOM.$compassBtn.style.pointerEvents = "";
+        DOM.$compassBtn.classList.add("d-none");
+      }
+    }
+
+    DOM.$compassBtn.style.pointerEvents = "none";
+    interval = setInterval(animateRotate, 2);
+  });
 
   // Import de fichiers
   document.getElementById("fileBtn").addEventListener('click', () => {

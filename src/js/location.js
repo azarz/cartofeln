@@ -39,6 +39,7 @@ function _goToGPSCoords(coords, zoom=Globals.map.getZoom(), panTo=true) {
   let markerLayer = L.featureGroup([positionMarker]);
   Globals.gpsMarkerLayer.addLayer(markerLayer);
   if (panTo) {
+    Globals.movedFromCode = true;
     if (Globals.currentRotation !== 0){
       Globals.map.setBearing(0);
       Globals.map.setView(new L.LatLng(coords.lat, coords.lon), zoom, {animate: false});
@@ -46,6 +47,7 @@ function _goToGPSCoords(coords, zoom=Globals.map.getZoom(), panTo=true) {
     } else {
       Globals.map.setView(new L.LatLng(coords.lat, coords.lon), zoom);
     }
+    Globals.movedFromCode = false;
   }
 }
 
@@ -197,5 +199,6 @@ export {
   cleanGPS,
   locationOnOff,
   requestLocationAccuracy,
-  getOrientation
+  getOrientation,
+  tracking_active,
 }

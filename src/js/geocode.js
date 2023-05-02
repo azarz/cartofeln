@@ -60,7 +60,9 @@ function _goToAddressCoords(coords, zoom=Globals.map.getZoom(), panTo=true) {
 
   Globals.adressMarkerLayer.addLayer(markerLayer);
   if (panTo) {
+    Globals.movedFromCode = true;
     Globals.map.setView(new L.LatLng(coords.lat, coords.lon), zoom);
+    Globals.movedFromCode = false;
   }
 }
 
