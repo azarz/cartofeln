@@ -219,7 +219,6 @@ function app() {
     route._currentPoints[0]._clearResults();
     route._currentPoints[0]._setMarker(e.latlng, null, false);
     route._currentPoints[0]._setCoordinate(e.latlng);
-    console.log(e.latlng);
     document.querySelector('input[id^="GProuteSubmit"]').click();
   }
 

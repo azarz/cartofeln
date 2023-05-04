@@ -174,6 +174,7 @@ function addEventListeners() {
 
       if (rotationStarted) {
         Globals.map.setBearing(Globals.currentRotation);
+        Location.positionMarker.setRotationAngle(Globals.positionBearing);
         DOM.$compassBtn.style.transform = "rotate(" + Globals.currentRotation + "deg)";
         DOM.$compassBtn.classList.remove("d-none");
       }
@@ -197,7 +198,6 @@ function addEventListeners() {
       if (!rotationStarted) {
         Globals.currentRotation = lastRotation;
         Globals.positionBearing = lastMarkerRotation;
-
       }
       rotationStarted = false;
       lastRotation = Globals.currentRotation;
@@ -254,10 +254,14 @@ function addEventListeners() {
     function animateRotate() {
       if (Globals.currentRotation < 180) {
         Globals.currentRotation -= 1;
+        Globals.positionBearing -= 1;
+
       } else {
         Globals.currentRotation += 1;
+        Globals.positionBearing += 1;
       }
       map.setBearing(Globals.currentRotation);
+      Location.positionMarker.setRotationAngle(Globals.positionBearing);
       DOM.$compassBtn.style.transform = "rotate(" + Globals.currentRotation + "deg)";
       if (Globals.currentRotation % 360 == 0) {
         clearInterval(interval);

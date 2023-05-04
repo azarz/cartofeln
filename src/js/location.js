@@ -201,4 +201,5 @@ export {
   requestLocationAccuracy,
   getOrientation,
   tracking_active,
+  positionMarker,
 }
