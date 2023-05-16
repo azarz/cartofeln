@@ -221,7 +221,7 @@ function addEventListeners() {
     disableRotation = false;
   });
 
-  map.on('movestart', function (e) {
+  Globals.map.on('movestart', function (e) {
     if (Globals.movedFromCode) {
       return
     } else if (Location.tracking_active){
