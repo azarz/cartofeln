@@ -262,7 +262,7 @@ function addEventListeners() {
         Globals.currentRotation += 1;
         Globals.positionBearing += 1;
       }
-      map.setBearing(Globals.currentRotation);
+      Globals.map.setBearing(Globals.currentRotation);
       if (Location.positionMarker) {
         Location.positionMarker.setRotationAngle(Globals.positionBearing);
       }
