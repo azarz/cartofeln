@@ -21,7 +21,7 @@
         <allow-intent href="market:*" />
         <hook type="after_prepare" src="remove_permissions.js"/>
         <preference name="OverrideUserAgent" value="cartofeln" />
-        <preference name="android-targetSdkVersion" value="32" />
+        <preference name="android-targetSdkVersion" value="33" />
         <preference name="AndroidInsecureFileModeEnabled" value="true" />
     </platform>
 </widget>
