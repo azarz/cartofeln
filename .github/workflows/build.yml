@@ -18,14 +18,6 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v3
 
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v1.3
-        with:
-          directory: .
-          file_name: .env
-          envkey_GP_TOKEN: ${{ secrets.GP_TOKEN }}
-          fail_on_empty: false
-
       - name: Setup java
         uses: actions/setup-java@v1
         with:
